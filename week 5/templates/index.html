@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+        {% block content %}
+            {%if students|length > 0 %}
+                <h1> Students list </h1>
+                <table id="all-students">
+                    <tr>
+                        <th>SNo</th>
+                        <th>Roll Number</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Actions</th>
+                    </tr>
+                    {%for k in range(students|length)%}
+                    
+                    <tr>
+                        <td>{{k+1}}</td>
+                        <td><a href="/student/{{students[k]['student_id']}}">{{students[k]['roll_number']}}</a></td>
+                        <td>{{students[k]['first_name']}}</td>
+                        <td>{{students[k]['last_name']}}</td>
+                        <td>
+                            <a href="/student/{{students[k]['student_id']}}/update" type="button">Update</a>
+                            <a href="/student/{{students[k]['student_id']}}/delete" type="button">Delete</a>
+                        </td>
+                       
+                    </tr>
+                    
+                    {%endfor%}
+                    
+                    
+                </table>
+                <br>
+                <a href='/student/create'><button> + Add Student </button></a>
+            
+                    
+            {% else %}
+                <h1>Students list</h1>
+                <div>No student found.Add the students now!</div>
+                <br>
+                <a href='/student/create'>+ Add Student </a>
+            {% endif %}
+        {% endblock content %}
+        
+
+</body>        
+</html>
